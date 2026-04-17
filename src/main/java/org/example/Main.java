@@ -9,4 +9,4 @@ public class Main {
         System.out.println("Subjects: " + gb.getSubjects());
         System.out.println("Average: " + gb.calcAvgForSubject("Math"));
     }
-}git add .
+}
