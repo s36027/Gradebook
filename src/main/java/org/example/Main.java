@@ -1,7 +1,7 @@
 package org.example;
 
 /**
- * Main class.
+ * Main application.
  */
 public final class Main {
 
@@ -13,6 +13,6 @@ public final class Main {
      * @param args arguments.
      */
     public static void main(final String[] args) {
-        System.out.println("Sukces");
+        System.out.println("Dry run success");
     }
 }

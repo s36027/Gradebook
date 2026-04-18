@@ -9,7 +9,9 @@ import java.util.Map;
  * Gradebook logic.
  */
 public final class Gradebook {
+    /** Map for subjects. */
     private final Map<String, List<Double>> subjects = new HashMap<>();
+    /** Rounding multiplier. */
     private final double multiplier = 100.0;
 
     /**
@@ -18,7 +20,7 @@ public final class Gradebook {
      */
     public void addSubject(final String subject) {
         if (subject == null || subject.isEmpty()) {
-            throw new IllegalArgumentException("Empty subject");
+            throw new IllegalArgumentException("Empty");
         }
         subjects.putIfAbsent(subject, new ArrayList<>());
     }
@@ -36,7 +38,7 @@ public final class Gradebook {
     }
 
     /**
-     * Calculates avg.
+     * Calculates average.
      * @param subject name.
      * @return average.
      */
@@ -54,11 +56,12 @@ public final class Gradebook {
     }
 
     /**
-     * Gets subjects.
+     * Returns subjects.
      * @return list.
      */
     public List<String> getSubjects() {
         return new ArrayList<>(subjects.keySet());
     }
 }
+
 

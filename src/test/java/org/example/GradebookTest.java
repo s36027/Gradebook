@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 /**
- * Tests.
+ * Gradebook tests.
  */
 public final class GradebookTest {
 
+    /** Gradebook instance. */
     private Gradebook gradebook;
+    /** Grade five. */
     private final double gradeFive = 5.0;
 
     /**
@@ -51,3 +53,4 @@ public final class GradebookTest {
         Assertions.assertEquals(gradeFive, gradebook.calcAvgForSubject("Math"));
     }
 }
+
