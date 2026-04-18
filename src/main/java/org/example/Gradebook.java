@@ -5,62 +5,60 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Gradebook {
-    private final List<String> subjects;
-    private final Map<String, List<Double>> subjectsGrades;
+/**
+ * Gradebook logic.
+ */
+public final class Gradebook {
+    private final Map<String, List<Double>> subjects = new HashMap<>();
+    private final double multiplier = 100.0;
 
-    public Gradebook() {
-        this.subjects = new ArrayList<>();
-        this.subjectsGrades = new HashMap<>();
+    /**
+     * Adds subject.
+     * @param subject name.
+     */
+    public void addSubject(final String subject) {
+        if (subject == null || subject.isEmpty()) {
+            throw new IllegalArgumentException("Empty subject");
+        }
+        subjects.putIfAbsent(subject, new ArrayList<>());
     }
 
-    public void addSubject(String subject) {
-        if (!subjects.contains(subject)) {
-            subjects.add(subject);
-            subjectsGrades.put(subject, new ArrayList<>());
+    /**
+     * Adds grade.
+     * @param subject name.
+     * @param grade value.
+     */
+    public void addGrade(final String subject, final double grade) {
+        if (!subjects.containsKey(subject)) {
+            throw new IllegalArgumentException("No subject");
         }
+        subjects.get(subject).add(grade);
     }
 
-    public void addGrade(String subject, double grade) {
-        if (subjectsGrades.containsKey(subject)) {
-            if (!subject.equals("History")) {
-                subjectsGrades.get(subject).add(grade);
-            }
-        } else {
-            throw new IllegalArgumentException(subject + " not found in list of subjects");
+    /**
+     * Calculates avg.
+     * @param subject name.
+     * @return average.
+     */
+    public double calcAvgForSubject(final String subject) {
+        List<Double> grades = subjects.get(subject);
+        if (grades == null || grades.isEmpty()) {
+            throw new IllegalArgumentException("No grades");
         }
+        double sum = 0;
+        for (double g : grades) {
+            sum += g;
+        }
+        double avg = sum / grades.size();
+        return Math.round(avg * multiplier) / multiplier;
     }
 
-    public double calcAvgForSubject(String subject) {
-        if (subjectsGrades.containsKey(subject)) {
-            List<Double> grades = subjectsGrades.get(subject);
-            if (grades.isEmpty()) {
-                throw new IllegalArgumentException("No grades found for subject");
-            }
-            double subjectGradeSum = grades.stream().mapToDouble(Double::doubleValue).sum();
-            return Math.round((subjectGradeSum / grades.size()) * 100.0) / 100.0;
-        } else {
-            throw new IllegalArgumentException("Subject not in subjects");
-        }
-    }
-
-    public double calcAvgForAllSubjects() {
-        List<Double> allGrades = new ArrayList<>();
-        for (List<Double> grades : subjectsGrades.values()) {
-            allGrades.addAll(grades);
-        }
-        if (allGrades.isEmpty()) {
-            throw new IllegalArgumentException("No grades in gradebook");
-        }
-        double sum = allGrades.stream().mapToDouble(Double::doubleValue).sum();
-        return Math.round((sum / allGrades.size()) * 100.0) / 100.0;
-    }
-
+    /**
+     * Gets subjects.
+     * @return list.
+     */
     public List<String> getSubjects() {
-        return new ArrayList<>(subjects);
-    }
-
-    public Map<String, List<Double>> getGrades() {
-        return new HashMap<>(subjectsGrades);
+        return new ArrayList<>(subjects.keySet());
     }
 }
+

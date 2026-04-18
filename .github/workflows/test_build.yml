@@ -1,8 +1,9 @@
-name: Zadanie 1,2
+---
+name: Zadanie 1, 2
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: ["main", "master"]
 
 jobs:
   build:
