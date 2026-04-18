@@ -1,4 +1,4 @@
-name: Zadanie 1
+name: Zadanie 1,2
 
 on:
   push:
@@ -10,20 +10,34 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - uses: actions/setup-java@v4
+      - name: Run application
+        uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
       - run: mvn compile exec:java -Dexec.mainClass="org.example.Main"
 
-      - run: mvn test
+      - name: Audit code quality
+        uses: github/super-linter@v5
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_JAVA: true
+          VALIDATE_XML: true
+          VALIDATE_YAML: true
 
-      - run: mvn package -DskipTests
+      - name: Run tests
+        run: mvn test
 
-      - uses: actions/upload-artifact@v4
+      - name: Package application
+        run: mvn package -DskipTests
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: Gradebook-App
           path: target/*.jar
