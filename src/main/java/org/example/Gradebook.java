@@ -9,9 +9,9 @@ import java.util.Map;
  * Gradebook logic.
  */
 public final class Gradebook {
-    /** Map for subjects. */
+    /** Subjects map. */
     private final Map<String, List<Double>> subjects = new HashMap<>();
-    /** Rounding multiplier. */
+    /** Multiplier. */
     private final double multiplier = 100.0;
 
     /**
@@ -56,12 +56,13 @@ public final class Gradebook {
     }
 
     /**
-     * Returns subjects.
+     * Gets subjects.
      * @return list.
      */
     public List<String> getSubjects() {
         return new ArrayList<>(subjects.keySet());
     }
 }
+
 
 

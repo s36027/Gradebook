@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 /**
- * Gradebook tests.
+ * Tests.
  */
 public final class GradebookTest {
-
     /** Gradebook instance. */
     private Gradebook gradebook;
-    /** Grade five. */
+    /** Test grade. */
     private final double gradeFive = 5.0;
 
     /**

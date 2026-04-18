@@ -1,10 +1,9 @@
 package org.example;
 
 /**
- * Main application.
+ * Main class.
  */
 public final class Main {
-
     private Main() {
     }
 
@@ -13,6 +12,7 @@ public final class Main {
      * @param args arguments.
      */
     public static void main(final String[] args) {
-        System.out.println("Dry run success");
+        System.out.println("Sukces");
     }
 }
+

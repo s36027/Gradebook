@@ -1,5 +1,5 @@
 ---
-name: Zadanie 1, 2
+name: Zadanie 1,2
 
 on:
   push:
@@ -30,6 +30,7 @@ jobs:
           VALIDATE_JAVA: true
           VALIDATE_XML: true
           VALIDATE_YAML: true
+          JAVA_CHECKSTYLE_CONFIG: google_checks.xml
 
       - name: Run tests
         run: mvn test
@@ -42,4 +43,3 @@ jobs:
         with:
           name: Gradebook-App
           path: target/*.jar
-
